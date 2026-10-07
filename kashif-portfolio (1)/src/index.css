@@ -1,0 +1,312 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@layer utilities {
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Safe area support for iOS notches & home bars */
+.safe-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+}
+
+.bottom-safe {
+  bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+}
+
+/* Ensure buttons, controls, and inputs have accessible touch sizes */
+button, input, select, textarea, [role="button"] {
+  touch-action: manipulation;
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.45);
+}
+
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 75s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse 65s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Maintain smooth continuous motion without freezing the whole track on touch */
+@media (hover: hover) and (pointer: fine) {
+  .animate-marquee:hover,
+  .animate-marquee-reverse:hover {
+    animation-play-state: running;
+  }
+}
+
+/* Smooth Keyframe Animations */
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+/* Organic Live Pulse & Radar Animations for Live Status Badges */
+@keyframes live-pulse {
+  0%, 100% {
+    transform: scale(0.95);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes live-radar {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.85;
+  }
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.animate-live-pulse {
+  animation: live-pulse 2.4s ease-in-out infinite;
+}
+
+.animate-live-radar {
+  animation: live-radar 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* CSS-based Hardware-Accelerated Aurora Flow */
+@keyframes aurora-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 0.14;
+  }
+  33% {
+    transform: translate3d(50px, -40px, 0) scale(1.15) rotate(15deg);
+    opacity: 0.22;
+  }
+  66% {
+    transform: translate3d(-30px, 30px, 0) scale(0.95) rotate(-10deg);
+    opacity: 0.16;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 0.14;
+  }
+}
+
+@keyframes aurora-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 0.12;
+  }
+  33% {
+    transform: translate3d(-60px, 40px, 0) scale(1.18) rotate(-20deg);
+    opacity: 0.20;
+  }
+  66% {
+    transform: translate3d(40px, -50px, 0) scale(0.9) rotate(12deg);
+    opacity: 0.14;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 0.12;
+  }
+}
+
+@keyframes aurora-3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 0.10;
+  }
+  50% {
+    transform: translate3d(70px, 60px, 0) scale(1.22) rotate(25deg);
+    opacity: 0.18;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 0.10;
+  }
+}
+
+@keyframes aurora-4 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.95);
+    opacity: 0.08;
+  }
+  50% {
+    transform: translate3d(-40px, -30px, 0) scale(1.12);
+    opacity: 0.16;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.95);
+    opacity: 0.08;
+  }
+}
+
+.animate-aurora-1 {
+  animation: aurora-1 22s ease-in-out infinite;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.animate-aurora-2 {
+  animation: aurora-2 28s ease-in-out infinite;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.animate-aurora-3 {
+  animation: aurora-3 25s ease-in-out infinite;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.animate-aurora-4 {
+  animation: aurora-4 32s ease-in-out infinite;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Subtle background grid pattern */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+}
+
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Optimized Print/PDF Styles */
+@media print {
+  @page {
+    margin: 12mm 15mm;
+    size: A4 portrait;
+  }
+  
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    overflow: visible !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #printable-resume-content,
+  #printable-resume-content * {
+    visibility: visible;
+  }
+
+  #printable-resume-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-aurora-1,
+  .animate-aurora-2,
+  .animate-aurora-3,
+  .animate-aurora-4,
+  .animate-pulse-glow,
+  .animate-live-pulse,
+  .animate-live-radar,
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
